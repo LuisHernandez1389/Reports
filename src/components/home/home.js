@@ -79,6 +79,7 @@ function Home() {
               <label htmlFor="tareasRealizadas">Tareas Realizadas</label>
               <textarea id="tareasRealizadas" value={tareasRealizadas} onChange={e => setTareasRealizadas(e.target.value)} rows="4" required></textarea>
             </div>
+            
 
             <div className="form-group">
               <label htmlFor="horasTrabajadas">Horas Trabajadas</label>

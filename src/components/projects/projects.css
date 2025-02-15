@@ -1,0 +1,199 @@
+:root {
+    --primary-color: #4a6cf7;
+    --text-color: #37404a;
+    --background-color: #f4f7ff;
+    --white: #ffffff;
+    --border-color: #e9edf4;
+    --status-por-hacer: #ff4d4d;
+    --status-en-proceso: #ff9800;
+    --status-terminado: #4caf50;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .form-wrapper {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    padding: 40px;
+    margin-bottom: 30px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group.full-width {
+    grid-column: span 2;
+  }
+
+  label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+
+  input {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
+  }
+
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: #3a56e6;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(58, 86, 230, 0.2);
+  }
+
+  .projects-table-container {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    padding: 40px;
+  }
+
+  .projects-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  .projects-table th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .projects-table td {
+    padding: 15px;
+    background-color: var(--white);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .projects-table tr {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .projects-table tr:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .status-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .status-por-hacer {
+    background-color: var(--status-por-hacer);
+    color: var(--white);
+  }
+
+  .status-en-proceso {
+    background-color: var(--status-en-proceso);
+    color: var(--white);
+  }
+
+  .status-terminado {
+    background-color: var(--status-terminado);
+    color: var(--white);
+  }
+
+  .action-column {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+  }
+
+  .action-btn:hover {
+    color: var(--primary-color);
+    background-color: rgba(74, 108, 247, 0.1);
+    transform: scale(1.1);
+  }
+
+  h1, h2 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
