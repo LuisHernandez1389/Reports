@@ -29,14 +29,15 @@
     animation: slideDown 0.5s ease-out;
   }
   
-  .navbar-content {
+.navbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     padding: 15px 20px;
-  }
+}
+
   
   .navbar-brand {
     display: flex;
