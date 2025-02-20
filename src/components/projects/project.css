@@ -22,11 +22,7 @@
     line-height: 1.6;
   }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-  }
+
 
   .form-wrapper {
     background-color: var(--white);
@@ -57,7 +53,7 @@
     color: var(--text-color);
   }
 
-  input {
+  .input-project {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 12px;
@@ -197,3 +193,7 @@
     margin-bottom: 20px;
     font-weight: 600;
   }
+
+
+
+  

@@ -1,0 +1,14 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "vendedores": {
+      ".read": true,
+      ".write": true,
+      "$uid": {
+        ".read": true,
+        ".write": true
+      }
+    }
+  }
+}

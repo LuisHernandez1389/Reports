@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./projects.css";
+import "./project.css";
 
 const Projects = () => {
     const [projectName, setProjectName] = useState('');
@@ -75,6 +75,7 @@ const Projects = () => {
                     <div className="form-group full-width">
                         <label>Nombre del Proyecto</label>
                         <input 
+                            className='input-project'
                             type="text" 
                             value={projectName} 
                             onChange={(e) => setProjectName(e.target.value)}
