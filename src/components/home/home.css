@@ -3,23 +3,30 @@
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   padding: 20px;
-/* Un máximo para evitar que sea demasiado grande en pantallas grandes */
   margin-left: auto;
   margin-right: auto;
+  max-width: 800px; /* Ajustado para no ser demasiado grande en pantallas grandes */
   transition: all 0.3s ease;
 }
-.input-home {
+
+.input-home, input, select, textarea {
+  width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 12px;
   font-size: 16px;
   background-color: #f9fafb;
-  transition: all 0.3s ease;
+  box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
 }
-input, textarea {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas en escritorio */
+  gap: 20px; /* Espacio entre campos */
+}
+
+.full-width {
+  grid-column: 1 / -1; /* Abarca toda la fila en escritorio */
 }
 
 @media (max-width: 768px) {
@@ -27,20 +34,16 @@ input, textarea {
     padding: 15px;
   }
 
-  input, .textarea  {
-    font-size: 16px; 
-  }
-
   .form-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr; /* Una columna en móviles */
   }
 
-  .pasos-container, .form-group {
-    padding: 8px; 
+  .full-width {
+    grid-column: 1 / -1; /* Abarca toda la fila en móvil */
   }
 
-  .paso-input, input, textarea {
-    padding: 12px; 
+  .input-home, input, select, textarea {
+    font-size: 16px; /* Ajusta tamaño de fuente en móviles */
   }
 }
 
@@ -49,7 +52,7 @@ input, textarea {
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   padding: 10px;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .pasos-header {
@@ -65,7 +68,7 @@ input, textarea {
   display: grid;
   gap: 10px;
   overflow-y: auto;
-  max-height: 200px; 
+  max-height: 200px;
 }
 
 .paso-item {
@@ -81,66 +84,12 @@ input, textarea {
   border-radius: 8px;
   border: 1px solid var(--border-color);
   margin-top: 10px;
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.paso-input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
-}
-
-
-.form-grid {
-  
-
-}
-.pasos-container {
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  padding: 10px;
-  margin-top: 10px; /* Reducido para dispositivos móviles */
-}
-
-.pasos-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 5px;
-}
-
-.pasos-list {
-  display: grid;
-  gap: 10px;
-  overflow-y: auto;
-  max-height: 200px; /* Aumentamos un poco para mostrar más contenido */
-}
-
-.paso-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  background-color: var(--light-gray);
-  border-radius: 8px;
-}
-
-
-
-.paso-input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
-}
-.input {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 12px;
   font-size: 16px;
-  background-color: #f9fafb;
-  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.paso-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
 }

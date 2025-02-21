@@ -39,10 +39,24 @@ h1 {
   gap: 20px;
 }
 
+@media (max-width: 450px) {
+
+  .report-details {
+    display: grid;
+    gap: 10px;
+    flex-grow: 1;
+    overflow: hidden;
+    max-height: 120px;
+    max-width: 300px;
+  }
+  
+}
+
 @media (min-width: 768px) {
   .reports-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
+  
 }
 
 .report-card {

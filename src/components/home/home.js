@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { database, storage } from '../../firebase'; // Importa la configuración de Firebase
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { ref as databaseRef, push, set } from 'firebase/database';
-import "./home.css"
+import { ref as databaseRef, push, set, get, ref } from 'firebase/database';
+import "./home.css";
+
 function Home() {
   // Estados para cada campo del formulario, incluyendo la imagen
   const [nombreEmpleado, setNombreEmpleado] = useState('');
@@ -15,6 +16,32 @@ function Home() {
   const [paso, setPaso] = useState('');
   const [imagen, setImagen] = useState(null);
   const [message, setMessage] = useState('');
+  const [proyectosDisponibles, setProyectosDisponibles] = useState([]); // Nuevo estado para almacenar los proyectos
+  const [employees, setEmployees] = useState([]);
+  
+  
+      useEffect(() => {
+          const fetchEmployees = async () => {
+              const employeesRef = ref(database, 'employees/');
+              try {
+                  const snapshot = await get(employeesRef);
+                  if (snapshot.exists()) {
+                      const fetchedEmployees = Object.keys(snapshot.val()).map(key => ({
+                          id: key,
+                          name: snapshot.val()[key].name,
+                      }));
+                      setEmployees(fetchedEmployees);
+                  } else {
+                      console.log("No data available");
+                  }
+              } catch (error) {
+                  console.error("Error al cargar los empleados:", error);
+              }
+          };
+  
+          fetchEmployees();
+      }, []);
+
 
   const manejarCambioPaso = (e) => {
     setPaso(e.target.value);
@@ -79,23 +106,48 @@ function Home() {
     });
   };
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const projectsRef = databaseRef(database, 'projects/');
+      try {
+        const snapshot = await get(projectsRef);
+        if (snapshot.exists()) {
+          const fetchedProjects = Object.keys(snapshot.val()).map(key => ({
+            id: key,
+            name: snapshot.val()[key].name
+          }));
+          setProyectosDisponibles(fetchedProjects);
+        } else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error("Error al cargar los proyectos:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <main className="container">
-      <div className="form-wrapper">
+      <div className="form-container">
       <h1>Generar Reporte</h1>
       <form onSubmit={handleSubmit} className="elegant-form">
         <div className="form-grid">
           <div className="form-group">
             <label htmlFor="nombreEmpleado">Nombre del Empleado</label>
-            <input
-              type="text"
-              id="nombreEmpleado"
-              value={nombreEmpleado}
-              onChange={(e) => setNombreEmpleado(e.target.value)}
-              required
-              className='input-home'
-
-            />
+            <select
+                id="nombreEmpleado"
+                value={nombreEmpleado}
+                onChange={(e) => setNombreEmpleado(e.target.value)}
+                required
+                className='input-home'
+              >
+                <option value="">Seleccione un proyecto</option>
+                {employees.map((proj) => (
+                  <option key={proj.id} value={proj.name}>{proj.name}</option>
+                ))}
+              </select>
           </div>
 
           <div className="form-group">
@@ -113,15 +165,19 @@ function Home() {
 
           <div className="form-group full-width">
             <label htmlFor="proyecto">Proyecto</label>
-            <input
-              type="text"
-              id="proyecto"
-              value={proyecto}
-              onChange={(e) => setProyecto(e.target.value)}
-              required
-              className='input-home'
-
-            />
+            <br/>
+            <select
+                id="proyecto"
+                value={proyecto}
+                onChange={(e) => setProyecto(e.target.value)}
+                required
+                className='input-home'
+              >
+                <option value="">Seleccione un proyecto</option>
+                {proyectosDisponibles.map((proj) => (
+                  <option key={proj.id} value={proj.name}>{proj.name}</option>
+                ))}
+              </select>
           </div>
 
           <div className="form-group full-width">
