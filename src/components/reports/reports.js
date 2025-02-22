@@ -81,6 +81,8 @@ const Reports = () => {
                 <span className="detail-label">Tareas:</span>
                 <span className="detail-value">{report.tareasRealizadas}</span>
               </div>
+
+
             </div>
             <div className="report-actions">
               <button className="btn" onClick={() => openViewModal(report)}>Ver Detalles</button>
@@ -90,27 +92,38 @@ const Reports = () => {
       </div>
 
       {isViewModalOpen && selectedReport && (
-<div className="modal-overlay">
-  <div className="modal">
-    <h2>Detalles del Reporte</h2>
-    <div className="card">
-      <img src={selectedReport.foto} width="250" alt="Detalle del reporte" className="modal-report-image" />
-      <div className="report-grid">
-        <div className="grid-item label">Empleado:</div>
-        <div className="grid-item value">{selectedReport.nombreEmpleado}</div>
-        <div className="grid-item label">Proyecto:</div>
-        <div className="grid-item value">{selectedReport.proyecto}</div>
-        <div className="grid-item label">Fecha:</div>
-        <div className="grid-item value">{selectedReport.fechaReporte}</div>
-        <div className="grid-item label">Horas Trabajadas:</div>
-        <div className="grid-item value">{selectedReport.horasTrabajadas} hrs</div>
-        <div className="grid-item label">Tareas:</div>
-        <div className="grid-item value">{selectedReport.tareasRealizadas}</div>
-      </div>
-    </div>
-    <button className="btn" onClick={closeModals}>Cerrar</button>
-  </div>
-</div>
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Detalles del Reporte</h2>
+            <div className="card">
+              <img src={selectedReport.foto} width="190" alt="Detalle del reporte" className="modal-report-image" />
+              <div className="report-grid">
+                <div className="grid-item label">Empleado:</div>
+                <div className="grid-item value">{selectedReport.nombreEmpleado}</div>
+                <div className="grid-item label">Proyecto:</div>
+                <div className="grid-item value">{selectedReport.proyecto}</div>
+                <div className="grid-item label">Fecha:</div>
+                <div className="grid-item value">{selectedReport.fechaReporte}</div>
+                <div className="grid-item label">Horas:</div>
+                <div className="grid-item value">{selectedReport.horasTrabajadas} hrs</div>
+                <div className="grid-item label">Tareas:</div>
+                <div className="grid-item value">{selectedReport.tareasRealizadas}</div>
+                <div className="grid-item label">Pasos :</div>
+                <br/>
+
+              </div>
+              <div className="pasos-list">
+                  {selectedReport.pasosRealizados.map((paso, index) => (
+                    <div key={index} className="paso-item">
+                      {paso}
+                    </div>
+                  ))}
+                </div>
+            </div>
+            <button className="btn" onClick={closeModals}>Cerrar</button>
+          </div>
+        </div>
+
 
       )}
 

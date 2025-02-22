@@ -129,11 +129,11 @@ const Lists = () => {
 
     return (
         <div className="lcontainer">
-            <div class="tabs-container">
-                <div class="tab-buttons">
+            <div className="tabs-container">
+                <div className="tab-buttons">
                     <button className={`tab-btn ${activeTab === 'tab1' ? 'active' : ''}`} id="ex-with-icons-tab-1" href="#ex-with-icons-tabs-1" role="tab"
                         aria-controls="ex-with-icons-tabs-1" aria-selected={activeTab === 'tab1'} onClick={() => handleTabClick('tab1')}>Proyectos</button>
-                    <button class="tab-btn" className={`tab-btn ${activeTab === 'tab2' ? 'active' : ''}`} id="ex-with-icons-tab-2" href="#ex-with-icons-tabs-2" role="tab"
+                    <button className={`tab-btn ${activeTab === 'tab2' ? 'active' : ''}`} id="ex-with-icons-tab-2" href="#ex-with-icons-tabs-2" role="tab"
                         aria-controls="ex-with-icons-tabs-2" aria-selected={activeTab === 'tab2'} onClick={() => handleTabClick('tab2')}>Empleados</button>
                 </div>
 

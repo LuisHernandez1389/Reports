@@ -18,29 +18,34 @@ function Home() {
   const [message, setMessage] = useState('');
   const [proyectosDisponibles, setProyectosDisponibles] = useState([]); // Nuevo estado para almacenar los proyectos
   const [employees, setEmployees] = useState([]);
-  
-  
-      useEffect(() => {
-          const fetchEmployees = async () => {
-              const employeesRef = ref(database, 'employees/');
-              try {
-                  const snapshot = await get(employeesRef);
-                  if (snapshot.exists()) {
-                      const fetchedEmployees = Object.keys(snapshot.val()).map(key => ({
-                          id: key,
-                          name: snapshot.val()[key].name,
-                      }));
-                      setEmployees(fetchedEmployees);
-                  } else {
-                      console.log("No data available");
-                  }
-              } catch (error) {
-                  console.error("Error al cargar los empleados:", error);
-              }
-          };
-  
-          fetchEmployees();
-      }, []);
+
+  // Función para eliminar un paso específico
+  const eliminarPaso = (index) => {
+    const nuevosPasos = pasos.filter((_, i) => i !== index);
+    setPasos(nuevosPasos);
+  };
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      const employeesRef = ref(database, 'employees/');
+      try {
+        const snapshot = await get(employeesRef);
+        if (snapshot.exists()) {
+          const fetchedEmployees = Object.keys(snapshot.val()).map(key => ({
+            id: key,
+            name: snapshot.val()[key].name,
+          }));
+          setEmployees(fetchedEmployees);
+        } else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error("Error al cargar los empleados:", error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
 
 
   const manejarCambioPaso = (e) => {
@@ -131,12 +136,12 @@ function Home() {
   return (
     <main className="container">
       <div className="form-container">
-      <h1>Generar Reporte</h1>
-      <form onSubmit={handleSubmit} className="elegant-form">
-        <div className="form-grid">
-          <div className="form-group">
-            <label htmlFor="nombreEmpleado">Nombre del Empleado</label>
-            <select
+        <h1>Generar Reporte</h1>
+        <form onSubmit={handleSubmit} className="elegant-form">
+          <div className="form-grid">
+            <div className="form-group">
+              <label htmlFor="nombreEmpleado">Nombre del Empleado</label>
+              <select
                 id="nombreEmpleado"
                 value={nombreEmpleado}
                 onChange={(e) => setNombreEmpleado(e.target.value)}
@@ -148,25 +153,25 @@ function Home() {
                   <option key={proj.id} value={proj.name}>{proj.name}</option>
                 ))}
               </select>
-          </div>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="fechaReporte">Fecha del Reporte</label>
-            <input
-              type="date"
-              id="fechaReporte"
-              value={fechaReporte}
-              onChange={(e) => setFechaReporte(e.target.value)}
-              required
-              className='input-home'
+            <div className="form-group">
+              <label htmlFor="fechaReporte">Fecha del Reporte</label>
+              <input
+                type="date"
+                id="fechaReporte"
+                value={fechaReporte}
+                onChange={(e) => setFechaReporte(e.target.value)}
+                required
+                className='input-home'
 
-            />
-          </div>
+              />
+            </div>
 
-          <div className="form-group full-width">
-            <label htmlFor="proyecto">Proyecto</label>
-            <br/>
-            <select
+            <div className="form-group full-width">
+              <label htmlFor="proyecto">Proyecto</label>
+              <br />
+              <select
                 id="proyecto"
                 value={proyecto}
                 onChange={(e) => setProyecto(e.target.value)}
@@ -178,87 +183,90 @@ function Home() {
                   <option key={proj.id} value={proj.name}>{proj.name}</option>
                 ))}
               </select>
-          </div>
+            </div>
 
-          <div className="form-group full-width">
-            <label htmlFor="tareasRealizadas">Tareas Realizadas</label>
-            <input
-              id="tareasRealizadas"
-              value={tareasRealizadas}
-              onChange={(e) => setTareasRealizadas(e.target.value)}
-              rows="4"
-              required
-              className='input-home'
-
-            />
-            <div className="pasos-container">
-              <div className="pasos-header">
-                <h4>Pasos Realizados</h4>
-              </div>
+            <div className="form-group full-width">
+              <label htmlFor="tareasRealizadas">Tareas Realizadas</label>
               <input
-                id="pasosRealizados"
-                value={paso}
-                onChange={manejarCambioPaso}
-                onKeyDown={manejarKeyDown}
-                rows="2"
-                placeholder="Escribe un paso y presiona 'Enter' para agregarlo."
-                className="paso-input"
+                id="tareasRealizadas"
+                value={tareasRealizadas}
+                onChange={(e) => setTareasRealizadas(e.target.value)}
+                rows="4"
+                required
+                className='input-home'
+
               />
-              <div className="pasos-list">
-                {pasos.map((item, index) => (
-                  <div className="paso-item" key={index}>
-                    <span>{item}</span>
-                  </div>
-                ))}
+              <div className="pasos-container">
+                <div className="pasos-header">
+                  <h4>Pasos Realizados</h4>
+                </div>
+                <input
+                  id="pasosRealizados"
+                  value={paso}
+                  onChange={manejarCambioPaso}
+                  onKeyDown={manejarKeyDown}
+                  rows="2"
+                  placeholder="Escribe un paso y presiona 'Enter' para agregarlo."
+                  className="paso-input"
+                />
+                <div className="pasos-list">
+                  {pasos.map((item, index) => (
+                    <div className="paso-item" key={index}>
+                      <span>{item}</span>
+
+                      <button className='btn-eliminar' onClick={() => eliminarPaso(index)}>Eliminar</button>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
+
+            <div className="form-group">
+              <label htmlFor="horasTrabajadas">Horas Trabajadas</label>
+              <input
+                type="number"
+                id="horasTrabajadas"
+                value={horasTrabajadas}
+                onChange={(e) => setHorasTrabajadas(e.target.value)}
+                min="0"
+                step="0.5"
+                required
+                className='input-home'
+
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="comentarios">Comentarios</label>
+              <input
+                className='input-home'
+                id="comentarios"
+                value={comentarios}
+                onChange={(e) => setComentarios(e.target.value)}
+                rows="2"
+              />
+            </div>
+
+            <div className="form-group full-width">
+              <label htmlFor="foto">Foto de Evidencia</label>
+              <input
+                className='input-home'
+                type="file"
+                id="foto"
+                onChange={handleImageChange}
+                required
+              />
+              <button type="submit" className="submit-btn">
+                Generar Reporte
+              </button>
+            </div>
+
           </div>
-
-          <div className="form-group">
-            <label htmlFor="horasTrabajadas">Horas Trabajadas</label>
-            <input
-              type="number"
-              id="horasTrabajadas"
-              value={horasTrabajadas}
-              onChange={(e) => setHorasTrabajadas(e.target.value)}
-              min="0"
-              step="0.5"
-              required
-              className='input-home'
-
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="comentarios">Comentarios</label>
-            <input
-              className='input-home'
-              id="comentarios"
-              value={comentarios}
-              onChange={(e) => setComentarios(e.target.value)}
-              rows="2"
-            />
-          </div>
-
-          <div className="form-group full-width">
-            <label htmlFor="foto">Foto de Evidencia</label>
-            <input 
-              className='input-home'
-              type="file"
-              id="foto"
-              onChange={handleImageChange}
-              required
-            />
-                      <button type="submit" className="submit-btn">
-            Generar Reporte
-          </button>
-          </div>
-
-        </div>
-      </form>
-      {message && <p>{message}</p>}
+        </form>
+        {message && <p>{message}</p>}
       </div>
     </main>
-);
+  );
 }
 export default Home;

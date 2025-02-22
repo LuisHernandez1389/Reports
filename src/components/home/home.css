@@ -93,3 +93,10 @@
   outline: none;
   box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
 }
+.btn-eliminar{
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+}
